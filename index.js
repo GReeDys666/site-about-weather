@@ -4,9 +4,11 @@ const API_KEY = '30cff0b97c5ec76bcab324f7405cb064';
 const API = 'b11d772481c444ee5e84f9dba50829ec';
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Satur"];
-getDefaultData = () => {
+
+
+getDefaultData = async () => {
     const URL = "https://api.openweathermap.org/data/2.5/weather";
-    const Full_Url = `${URL}?q=Lviv,UA&appid=${API_KEY}&units=metric`;
+    const Full_Url = `${URL}?q=Zymna Voda,UA&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(Full_Url);
 
     return weatherPromise.then((response) => {
@@ -17,7 +19,6 @@ getDefaultData = () => {
 (function defaultCity() {
     getDefaultData()
         .then((response) => {
-            console.log(response);
             showWeatherData(response);
         })
         .catch((err) => {
@@ -43,7 +44,7 @@ showWeatherData = (weatherData) => {
     let iconCodeToday = weatherData.weather[0].icon;
     let iconFullUrlToday = `${iconBaseUrl}${iconCodeToday}${iconFormat}`;
     currentIcon.src = iconFullUrlToday;
-    
+
 
     //Weather daily data
     document.querySelector(".value").innerText = Math.round(weatherData.main.temp) + "°";
@@ -59,21 +60,24 @@ showWeatherData = (weatherData) => {
     let sunsetMinutes = sunsetDate.getMinutes();
     let sunriseHours = sunriseDate.getHours();
     let sunriseMinutes = sunriseDate.getMinutes();
-    if(sunriseMinutes < 10){
+    if (sunriseMinutes < 10) {
         document.querySelector(".current-stats__sunrise").innerText = sunriseHours + ":" + "0" + sunriseMinutes;
         document.querySelector(".current-stats__sunset").innerText = sunsetHours + ":" + sunsetMinutes;
     } else if (sunsetMinutes < 10) {
         document.querySelector(".current-stats__sunrise").innerText = sunriseHours + ":" + sunriseMinutes;
         document.querySelector(".current-stats__sunset").innerText = sunsetHours + ":" + "0" + sunsetMinutes;
+    }else {
+        document.querySelector(".current-stats__sunrise").innerText = sunriseHours + ":" + sunriseMinutes;
+        document.querySelector(".current-stats__sunset").innerText = sunsetHours + ":" + sunsetMinutes;
     }
 
 
 }
 // ****************************************************************
 
-getHoursData = () => {
+getHoursData = async () => {
     const URL = "https://pro.openweathermap.org/data/2.5/forecast/hourly";
-    const fullUrl = `${URL}?lat=49.84&lon=24.03&cnt=24&appid=${API_KEY}&units=metric`;
+    const fullUrl = `${URL}?lat=49.82&lon=23.90&cnt=24&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(fullUrl);
 
     return weatherPromise.then(response => response.json());
@@ -104,9 +108,9 @@ showHoursData = (data) => {
 
 
 // ****************************************************************
-getFiveDaysData = () => {
+getFiveDaysData = async () => {
     const URL = "https://api.openweathermap.org/data/2.5/forecast/daily";
-    const fullUrl = `${URL}?lat=49.84&lon=24.03&cnt=7&appid=${API_KEY}&units=metric`;
+    const fullUrl = `${URL}?lat=49.82&lon=23.90&cnt=7&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(fullUrl);
 
     return weatherPromise.then(response => response.json());
@@ -115,7 +119,6 @@ getFiveDaysData = () => {
 (function showData() {
     getFiveDaysData()
         .then((response) => {
-            console.log(response);
             showDefaultData(response);
         })
         .catch((err) => {
@@ -140,34 +143,33 @@ showDefaultData = (data) => {
         switch (mainWeather) {
             case "Snow":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/snow.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/snow.gif')";
+                break;
             case "Clouds":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/clouds.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/clouds.gif')";
+                break;
             case "Fog":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/fog.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/fog.gif')";
+                break;
             case "Rain":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/rain.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/rain.gif')";
+                break;
             case "Clear":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')";
+                break;
             case "Thunderstorm":
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/thunderstorm.gif')";
-              break;
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/thunderstorm.gif')";
+                break;
             default:
                 document.querySelectorAll(".next-5-days__row")[i].style.backgroundImage =
-                "url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')";
-              break;
-          }
+                    "url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')";
+                break;
+        }
     }
 
 }
-
