@@ -86,7 +86,6 @@ body {
 
 
 .weather-by-hour {
-    display: none;
     width: 100%;
 }
 
@@ -232,43 +231,3 @@ body {
         font-size: 1.1em;
     }
 }
-
-/* 
-
-input[type="text"]{
-    margin-top: 8px;
-    height: 3rem;
-    border-radius: 8px;
-    border: 2px solid #E7E7E9;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-input:focus{
-    background-color: #fff;
-    color: #495057;
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0 0.2rem rgb(0,123,255,25%);
-}
-
-input[type="button"]{
-    background-color: #0f0f0f;
-    height: 2.2rem;
-    width: 7.5rem;
-    color: whitesmoke;
-    font-size: 1.1rem;
-    outline: none;
-    border-radius: 8px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-}
-
-.result{
-    background-image: url("img/snow.gif");
-    color: #E7E7E9;
-    
-} */
