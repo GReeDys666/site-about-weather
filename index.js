@@ -8,7 +8,7 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Satur"];
 
 getDefaultData = async () => {
     const URL = "https://api.openweathermap.org/data/2.5/weather";
-    const Full_Url = `${URL}?q=Zymna Voda,UA&appid=${API_KEY}&units=metric`;
+    const Full_Url = `${URL}?q=Lviv,UA&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(Full_Url);
 
     return weatherPromise.then((response) => {
@@ -77,7 +77,7 @@ showWeatherData = (weatherData) => {
 
 getHoursData = async () => {
     const URL = "https://pro.openweathermap.org/data/2.5/forecast/hourly";
-    const fullUrl = `${URL}?lat=49.82&lon=23.90&cnt=24&appid=${API_KEY}&units=metric`;
+    const fullUrl = `${URL}?lat=49.84&lon=24.03&cnt=24&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(fullUrl);
 
     return weatherPromise.then(response => response.json());
@@ -110,7 +110,7 @@ showHoursData = (data) => {
 // ****************************************************************
 getFiveDaysData = async () => {
     const URL = "https://api.openweathermap.org/data/2.5/forecast/daily";
-    const fullUrl = `${URL}?lat=49.82&lon=23.90&cnt=7&appid=${API_KEY}&units=metric`;
+    const fullUrl = `${URL}?lat=49.84&lon=24.03&cnt=7&appid=${API_KEY}&units=metric`;
     const weatherPromise = fetch(fullUrl);
 
     return weatherPromise.then(response => response.json());
@@ -173,3 +173,10 @@ showDefaultData = (data) => {
     }
 
 }
+
+function getlocaleDate(){
+    const currenttime = new Date().toLocaleTimeString();
+    document.querySelector(".time").innerHTML = currenttime;
+}
+
+setInterval(getlocaleDate, 1000);
